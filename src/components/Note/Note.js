@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-const Note = props => {
+function Note(props) {
 
     const [showDesc, setShowDesc] = useState(false);
 
-    const toggleDesc = () => {
+    function toggleDesc() {
         setShowDesc(!showDesc);
     }
 
-    const editHandler = () => {
+    function editHandler() {
         props.onEdit({
             title: props.title,
             body: props.body,
