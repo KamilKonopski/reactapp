@@ -1,10 +1,11 @@
 import React from 'react';
 
-import './Notes.css';
-import Note from '../Note/Note';
-import NewNote from '../NewNote/NewNote';
 import EditNote from '../EditNote/EditNote';
 import Modal from 'react-modal';
+import NewNote from '../NewNote/NewNote';
+import Note from '../Note/Note';
+
+import './Notes.css';
 
 class Notes extends React.Component {
     constructor(props) {
