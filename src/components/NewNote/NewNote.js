@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 
-const NewNote = props => {
+function NewNote(props) {
 
     const [showForm, setShowForm] = useState(false)
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
 
-    const changeTitleHandler = event => {
+    function changeTitleHandler(event) {
         const value = event.target.value;
         setTitle(value);
     }
 
-    const changeDescHandler = event => {
+    function changeDescHandler(event) {
         const value = event.target.value;
         setDesc(value);
     }
 
-    const addNote = () => {
+    function addNote() {
         const note = {
             title: title,
             body: desc,
