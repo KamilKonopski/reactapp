@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 
-const EditNote = props => {
+function EditNote(props) {
 
     const [title, setTitle] = useState(props.title);
     const [desc, setDesc] = useState(props.body);
 
-    const changeTitleHandler = event => {
+    function changeTitleHandler(event) {
         const value = event.target.value;
         setTitle(value);
     }
 
-    const changeDescHandler = event => {
+    function changeDescHandler(event) {
         const value = event.target.value;
         setDesc(value);
     }
 
-    const editNote = () => {
+    function editNote() {
         const note = {
             title: title,
             body: desc,
