@@ -5,7 +5,7 @@ import Modal from "react-modal";
 import NewNote from "../NewNote/NewNote";
 import Note from "../Note/Note";
 
-import "./Notes.css";
+import classes from "./Notes.module.css";
 
 const Notes = () => {
 	const [notes, setNotes] = useState([
@@ -50,11 +50,12 @@ const Notes = () => {
 		setEditedNote(note);
 	};
 	return (
-		<div>
+		<div className={classes.notes}>
 			<h1>Moje notatki:</h1>
 			<NewNote onAdd={(note) => addNote(note)} />
 
 			<Modal
+				className={classes.modal}
 				appElement={document.getElementById("modal")}
 				isOpen={showEditModal}
 				contentLabel="Edytuj notatkę"
@@ -65,9 +66,7 @@ const Notes = () => {
 					id={editedNote.id}
 					onEdit={(note) => editNote(note)}
 				/>
-				<button className="note" onClick={() => toggleModal()}>
-					Anuluj
-				</button>
+				<button onClick={() => toggleModal()}>Anuluj</button>
 			</Modal>
 
 			{notes.map((note) => (
