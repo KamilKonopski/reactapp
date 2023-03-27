@@ -1,0 +1,18 @@
+.new-note label {
+    display: block;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.new-note input {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    color: #495057;
+    display: block;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: .375rem .75rem;
+    width: 100%;
+    margin-bottom: 10px;
+}

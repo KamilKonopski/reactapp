@@ -1,0 +1,32 @@
+.edit-note {
+    padding: 10px;
+}
+
+.edit-note label {
+    display: block;
+    color: #495057;
+    margin-bottom: 10px;
+}
+
+.edit-note input {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    color: #495057;
+    display: block;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: .375rem .75rem;
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.edit-note button {
+    background-color: rgb(129, 70, 240);
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    margin: 2px;
+    padding: 4px 8px;
+}
