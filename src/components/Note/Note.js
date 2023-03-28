@@ -13,7 +13,7 @@ function Note(props) {
 		props.onEdit({
 			title: props.title,
 			body: props.body,
-			id: props.id,
+			_id: props.id,
 		});
 	}
 
