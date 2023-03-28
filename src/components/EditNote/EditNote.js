@@ -20,7 +20,7 @@ function EditNote(props) {
 		const note = {
 			title: title,
 			body: desc,
-			id: props.id,
+			_id: props.id,
 		};
 		props.onEdit(note);
 	}
