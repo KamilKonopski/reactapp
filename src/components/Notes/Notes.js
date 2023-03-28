@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import EditNote from "../EditNote/EditNote";
 import Modal from "react-modal";
@@ -8,28 +8,38 @@ import Note from "../Note/Note";
 import classes from "./Notes.module.css";
 
 const Notes = () => {
-	const [notes, setNotes] = useState([
-		{
-			id: "1",
-			title: "Wykąpać psa",
-			body: "Wykąpać specjalnym szamponem",
-		},
-		{
-			id: "2",
-			title: "Zrobić zakupy",
-			body: "kupić mleko, chleb, jajka",
-		},
-	]);
+	const [notes, setNotes] = useState([]);
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [editedNote, setEditedNote] = useState({});
 
+	useEffect(() => {
+		fetch(process.env.REACT_APP_API_URL)
+			.then((res) => res.json())
+			.then((data) => setNotes(data));
+	}, []);
+
 	const deleteNote = (id) => {
-		const filteredNotes = notes.filter((note) => note.id !== id);
+		const filteredNotes = notes.filter((note) => note._id !== id);
 		setNotes(filteredNotes);
+
+		fetch(`${process.env.REACT_APP_API_URL}/${id}`, {
+			method: "DELETE",
+		});
 	};
 
 	const addNote = (note) => {
-		setNotes([...notes, note]);
+		fetch(process.env.REACT_APP_API_URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				title: note.title,
+				body: note.body,
+			}),
+		})
+			.then((res) => res.json())
+			.then((data) => setNotes([...notes, data]));
 	};
 
 	const editNote = (note) => {
@@ -37,8 +47,19 @@ const Notes = () => {
 		if (index >= 0) {
 			notes[index] = note;
 			setNotes(notes);
-			toggleModal();
 		}
+		fetch(`${process.env.REACT_APP_API_URL}/${note._id}`, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				title: note.title,
+				body: note.body,
+			}),
+		});
+
+		toggleModal();
 	};
 
 	const toggleModal = () => {
@@ -63,7 +84,7 @@ const Notes = () => {
 				<EditNote
 					title={editedNote.title}
 					body={editedNote.body}
-					id={editedNote.id}
+					id={editedNote._id}
 					onEdit={(note) => editNote(note)}
 				/>
 				<button onClick={() => toggleModal()}>Anuluj</button>
@@ -71,10 +92,10 @@ const Notes = () => {
 
 			{notes.map((note) => (
 				<Note
-					key={note.id}
+					key={note._id}
 					title={note.title}
 					body={note.body}
-					id={note.id}
+					id={note._id}
 					onEdit={(note) => editNoteHandler(note)}
 					onDelete={(id) => deleteNote(id)}
 				/>
